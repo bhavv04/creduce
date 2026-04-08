@@ -32,8 +32,8 @@ int main(void) {
     Job job = {
         .map         = wordcount_map,
         .reduce      = wordcount_reduce,
-        .input_file  = "data/input.txt",
-        .output_file = "data/output.txt",
+        .input_file  = "data/moby_dick.txt",
+        .output_file = "data/moby_dick_output.txt",
         .num_threads = 1,
     };
 
