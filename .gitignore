@@ -1,6 +1,5 @@
 *.exe
 *.o
 wordcount
-data/moby_dick.txt
-data/moby_dick_output.txt
-data/output.txt
+data/
+
