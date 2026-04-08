@@ -34,7 +34,7 @@ int main(void) {
         .reduce      = wordcount_reduce,
         .input_file  = "data/moby_dick.txt",
         .output_file = "data/moby_dick_output.txt",
-        .num_threads = 1,
+        .num_threads = 4,
     };
 
     return run_job(&job);

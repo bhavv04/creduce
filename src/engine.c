@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "mapreduce.h"
+#include "threadpool.h"
 
 KVList *kvlist_create(size_t initial_capacity) {
     KVList *list = malloc(sizeof(KVList));
@@ -121,8 +122,10 @@ int run_job(Job *job) {
     KVList *input = read_input(job->input_file);
     if (!input) return -1;
 
-    printf("[creduce] map phase — %zu records\n", input->count);
-    KVList *mapped = map_phase(job, input);
+    printf("[creduce] map phase — %zu records across %d threads\n", input->count, job->num_threads);
+    KVList *mapped = job->num_threads > 1
+        ? parallel_map(job, input)
+        : map_phase(job, input);
     kvlist_free(input);
 
     printf("[creduce] shuffle phase — %zu pairs\n", mapped->count);
